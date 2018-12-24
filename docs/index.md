@@ -115,10 +115,13 @@ Branch 'master' set up to track remote branch 'master' from 'origin'.
 Use `mkdocs` to create a branch for the generated site files and to push it to GitHub. These will be available from the GitHub Pages website.
 
 ```bash
-
+galibier:mkdocs-ghpages-recipe david$ mkdocs gh-deploy
+INFO    -  Cleaning site directory 
+INFO    -  Building documentation to directory: /Users/david/Projects/mkdocs-ghpages-recipe/site 
+WARNING -  Version check skipped: No version specificed in previous deployment. 
+INFO    -  Copying '/Users/david/Projects/mkdocs-ghpages-recipe/site' to 'gh-pages' branch and pushing to GitHub. 
+INFO    -  Your documentation should shortly be available at: https://outofphase.github.io/mkdocs-ghpages-recipe/ 
 ```
-
-
 
 ## Maintaining the site
 

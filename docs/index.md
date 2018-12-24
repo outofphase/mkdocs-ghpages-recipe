@@ -164,11 +164,39 @@ INFO    -  Building documentation...
 INFO    -  Cleaning site directory 
 ```
 
-Merge each completed change into the testing branch when ready, generate and check the site and finally push it all to GitHub:
+Commit the changes when ready and then merge completed change branch into the testing branch, generate and check the site there:
+
+``` bash
+galibier:mkdocs-ghpages-recipe david$ git status
+On branch branching
+nothing to commit, working tree clean
+galibier:mkdocs-ghpages-recipe david$ git checkout testing
+Switched to branch 'testing'
+galibier:mkdocs-ghpages-recipe david$ git merge branching
+Updating 7cc566d..bbdb1e4
+Fast-forward
+ docs/index.md | 47 +++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
+galibier:mkdocs-ghpages-recipe david$ git status
+On branch testing
+nothing to commit, working tree clean
+galibier:mkdocs-ghpages-recipe david$ git branch
+  branching
+  gh-pages
+  master
+* testing
+galibier:mkdocs-ghpages-recipe david$ git branch remove branching
+galibier:mkdocs-ghpages-recipe david$ mkdocs build
+INFO    -  Cleaning site directory 
+INFO    -  Building documentation to directory: /Users/david/Projects/mkdocs-ghpages-recipe/site 
+galibier:mkdocs-ghpages-recipe david$ mkdocs serve
+INFO    -  Building documentation... 
+INFO    -  Cleaning site directory 
+```
+
+Finally update the mainline, then generate the site files and push it all to GitHub:
 
 ``` bash
 
 ```
-
-
 

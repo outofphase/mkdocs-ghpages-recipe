@@ -185,7 +185,7 @@ galibier:mkdocs-ghpages-recipe david$ git branch
   gh-pages
   master
 * testing
-galibier:mkdocs-ghpages-recipe david$ git branch remove branching
+galibier:mkdocs-ghpages-recipe david$ git branch --delete branching
 galibier:mkdocs-ghpages-recipe david$ mkdocs build
 INFO    -  Cleaning site directory 
 INFO    -  Building documentation to directory: /Users/david/Projects/mkdocs-ghpages-recipe/site 

@@ -125,3 +125,50 @@ INFO    -  Your documentation should shortly be available at: https://outofphase
 
 ## Maintaining the site
 
+Since the site is generated locally and pushed to the GitHub webserver, updating the site after making local changes requires two steps so that the repository and site stay in sync:
+
+* commit local changes and push the `master` branch to GitHub
+* generate the new site files and push the `gh-pages` branch to GitHub, which is done by mkdocs.
+
+Rather than polluting the GitHub repository with every experimental change, you can create a local branch for testing. Further branches from that can be created to work on specific changes too if you want to work on things in parallel. Then merge into the mainline when ready to publish.
+
+``` bash
+galibier:mkdocs-ghpages-recipe david$ git branch testing
+galibier:mkdocs-ghpages-recipe david$ git branch
+  gh-pages
+* master
+  testing
+galibier:mkdocs-ghpages-recipe david$ git checkout testing
+Switched to branch 'testing'
+galibier:mkdocs-ghpages-recipe david$ git branch branching
+galibier:mkdocs-ghpages-recipe david$ git branch
+  branching
+  gh-pages
+  master
+* testing
+galibier:mkdocs-ghpages-recipe david$ git checkout branching
+Switched to branch 'branching'
+galibier:mkdocs-ghpages-recipe david$ git status
+On branch branching
+nothing to commit, working tree clean
+```
+
+Make the changes and test them locally:
+
+``` bash
+galibier:mkdocs-ghpages-recipe david$ mkdocs build
+INFO    -  Cleaning site directory 
+INFO    -  Building documentation to directory: /Users/david/Projects/mkdocs-ghpages-recipe/site 
+galibier:mkdocs-ghpages-recipe david$ mkdocs serve
+INFO    -  Building documentation... 
+INFO    -  Cleaning site directory 
+```
+
+Merge each completed change into the testing branch when ready, generate and check the site and finally push it all to GitHub:
+
+``` bash
+
+```
+
+
+

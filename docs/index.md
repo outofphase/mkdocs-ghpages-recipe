@@ -52,20 +52,73 @@ galibier:mkdocs-ghpages-recipe david$ echo "site/" >> .gitignore
 
 Create a local git repository and add the project files to it:
 
+```bash
+galibier:Projects david$ git init mkdocs-ghpages-recipe/
+Reinitialized existing Git repository in /Users/david/Projects/mkdocs-ghpages-recipe/.git/
+galibier:Projects david$ cd mkdocs-ghpages-recipe/
+galibier:mkdocs-ghpages-recipe david$ git add .
+galibier:mkdocs-ghpages-recipe david$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+	new file:   .gitignore
+	new file:   LICENSE.md
+	new file:   README.md
+	new file:   docs/index.md
+	new file:   mkdocs.yml
+
+galibier:mkdocs-ghpages-recipe david$ git commit -m 'initial commit'
+[master (root-commit) 32b167d] initial commit
+ 5 files changed, 75 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 LICENSE.md
+ create mode 100644 README.md
+ create mode 100644 docs/index.md
+ create mode 100644 mkdocs.yml
 ```
-
-```
-
-
 
 ## Push to GitHub
 
+Create a new repository on GitHub but do _not_ initialize the new repository with any files. Copy the remote respository URL.
+
+On the local computer:
+
+* use the URL to add this as a remote repository
+* push the local repository to GitHub
+
+```bash
+galibier:mkdocs-ghpages-recipe david$ git remote add origin https://github.com/outofphase/mkdocs-ghpages-recipe.git
+galibier:mkdocs-ghpages-recipe david$ git remote -v
+origin	https://github.com/outofphase/mkdocs-ghpages-recipe.git (fetch)
+origin	https://github.com/outofphase/mkdocs-ghpages-recipe.git (push)
+galibier:mkdocs-ghpages-recipe david$ git push -u origin master
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (8/8), 1.44 KiB | 1.44 MiB/s, done.
+Total 8 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/outofphase/mkdocs-ghpages-recipe.git
+ * [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'. 
+```
+> For more information see https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
 
 
-## Create GitHub pages site
+## Create GitHub Pages site
+
+Use `mkdocs` to create a branch for the generated site files and to push it to GitHub. These will be available from the GitHub Pages website.
+
+```bash
+
+```
 
 
 
+## Maintaining the site
 
-
-[http://127.0.0.1:8000/]: 

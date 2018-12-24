@@ -158,10 +158,81 @@ Branch 'master' set up to track remote branch 'master' from 'origin'.
 </blockquote>
 <h2 id="create-github-pages-site">Create GitHub Pages site</h2>
 <p>Use <code>mkdocs</code> to create a branch for the generated site files and to push it to GitHub. These will be available from the GitHub Pages website.</p>
-<pre><code class="bash">
+<pre><code class="bash">galibier:mkdocs-ghpages-recipe david$ mkdocs gh-deploy
+INFO    -  Cleaning site directory 
+INFO    -  Building documentation to directory: /Users/david/Projects/mkdocs-ghpages-recipe/site 
+WARNING -  Version check skipped: No version specificed in previous deployment. 
+INFO    -  Copying '/Users/david/Projects/mkdocs-ghpages-recipe/site' to 'gh-pages' branch and pushing to GitHub. 
+INFO    -  Your documentation should shortly be available at: https://outofphase.github.io/mkdocs-ghpages-recipe/ 
 </code></pre>
 
-<h2 id="maintaining-the-site">Maintaining the site</h2></div>
+<h2 id="maintaining-the-site">Maintaining the site</h2>
+<p>Since the site is generated locally and pushed to the GitHub webserver, updating the site after making local changes requires two steps so that the repository and site stay in sync:</p>
+<ul>
+<li>commit local changes and push the <code>master</code> branch to GitHub</li>
+<li>generate the new site files and push the <code>gh-pages</code> branch to GitHub, which is done by mkdocs.</li>
+</ul>
+<p>Rather than polluting the GitHub repository with every experimental change, you can create a local branch for testing. Further branches from that can be created to work on specific changes too if you want to work on things in parallel. Then merge into the mainline when ready to publish.</p>
+<pre><code class="bash">galibier:mkdocs-ghpages-recipe david$ git branch testing
+galibier:mkdocs-ghpages-recipe david$ git branch
+  gh-pages
+* master
+  testing
+galibier:mkdocs-ghpages-recipe david$ git checkout testing
+Switched to branch 'testing'
+galibier:mkdocs-ghpages-recipe david$ git branch branching
+galibier:mkdocs-ghpages-recipe david$ git branch
+  branching
+  gh-pages
+  master
+* testing
+galibier:mkdocs-ghpages-recipe david$ git checkout branching
+Switched to branch 'branching'
+galibier:mkdocs-ghpages-recipe david$ git status
+On branch branching
+nothing to commit, working tree clean
+</code></pre>
+
+<p>Make the changes and test them locally:</p>
+<pre><code class="bash">galibier:mkdocs-ghpages-recipe david$ mkdocs build
+INFO    -  Cleaning site directory 
+INFO    -  Building documentation to directory: /Users/david/Projects/mkdocs-ghpages-recipe/site 
+galibier:mkdocs-ghpages-recipe david$ mkdocs serve
+INFO    -  Building documentation... 
+INFO    -  Cleaning site directory 
+</code></pre>
+
+<p>Commit the changes when ready and then merge completed change branch into the testing branch, generate and check the site there:</p>
+<pre><code class="bash">galibier:mkdocs-ghpages-recipe david$ git status
+On branch branching
+nothing to commit, working tree clean
+galibier:mkdocs-ghpages-recipe david$ git checkout testing
+Switched to branch 'testing'
+galibier:mkdocs-ghpages-recipe david$ git merge branching
+Updating 7cc566d..bbdb1e4
+Fast-forward
+ docs/index.md | 47 +++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
+galibier:mkdocs-ghpages-recipe david$ git status
+On branch testing
+nothing to commit, working tree clean
+galibier:mkdocs-ghpages-recipe david$ git branch
+  branching
+  gh-pages
+  master
+* testing
+galibier:mkdocs-ghpages-recipe david$ git branch remove branching
+galibier:mkdocs-ghpages-recipe david$ mkdocs build
+INFO    -  Cleaning site directory 
+INFO    -  Building documentation to directory: /Users/david/Projects/mkdocs-ghpages-recipe/site 
+galibier:mkdocs-ghpages-recipe david$ mkdocs serve
+INFO    -  Building documentation... 
+INFO    -  Cleaning site directory 
+</code></pre>
+
+<p>Finally update the mainline, then generate the site files and push it all to GitHub:</p>
+<pre><code class="bash">
+</code></pre></div>
         </div>
 
         <footer class="col-md-12">
@@ -244,5 +315,5 @@ Branch 'master' set up to track remote branch 'master' from 'origin'.
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2018-12-24 11:51:19
+Build Date UTC : 2018-12-24 13:19:49
 -->

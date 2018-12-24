@@ -197,6 +197,38 @@ INFO    -  Cleaning site directory
 Finally update the mainline, then generate the site files and push it all to GitHub:
 
 ``` bash
+galibier:mkdocs-ghpages-recipe david$ git status
+On branch testing
+nothing to commit, working tree clean
+galibier:mkdocs-ghpages-recipe david$ git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+galibier:mkdocs-ghpages-recipe david$ git merge testing
+Updating 4eb3319..283f7a3
+Fast-forward
+ docs/index.md | 80 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 79 insertions(+), 1 deletion(-)
+galibier:mkdocs-ghpages-recipe david$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 4 commits.
+  (use "git push" to publish your local commits)
 
+nothing to commit, working tree clean
+galibier:mkdocs-ghpages-recipe david$ git push
+Enumerating objects: 19, done.
+Counting objects: 100% (19/19), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (16/16), 3.52 KiB | 3.52 MiB/s, done.
+Total 16 (delta 7), reused 0 (delta 0)
+remote: Resolving deltas: 100% (7/7), completed with 1 local object.
+To https://github.com/outofphase/mkdocs-ghpages-recipe.git
+   32b167d..283f7a3  master -> master
+galibier:mkdocs-ghpages-recipe david$ mkdocs gh-deploy
+INFO    -  Cleaning site directory 
+INFO    -  Building documentation to directory: /Users/david/Projects/mkdocs-ghpages-recipe/site 
+INFO    -  Copying '/Users/david/Projects/mkdocs-ghpages-recipe/site' to 'gh-pages' branch and pushing to GitHub. 
+INFO    -  Your documentation should shortly be available at: https://outofphase.github.io/mkdocs-ghpages-recipe/ 
 ```
 

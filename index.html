@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="None">
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>mkdocs-ghpages-recipe</title>
+        <link href="css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body class="homepage">
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href=".">mkdocs-ghpages-recipe</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#recipe-for-websites-hosted-on-github-pages">Recipe for websites hosted on GitHub Pages</a></li>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#create-project">Create project</a></li>
+            <li><a href="#create-local-git-repository-of-the-files">Create local git repository of the files</a></li>
+            <li><a href="#push-to-github">Push to GitHub</a></li>
+            <li><a href="#create-github-pages-site">Create GitHub Pages site</a></li>
+            <li><a href="#maintaining-the-site">Maintaining the site</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="recipe-for-websites-hosted-on-github-pages">Recipe for websites hosted on GitHub Pages</h1>
+<h2 id="overview">Overview</h2>
+<p>A step-by-step walkthrough to create a collaborative documentation project using <strong>mkdocs</strong> that has a website hosted on GitHub Pages.</p>
+<p>Pre-requisites:</p>
+<ul>
+<li>an OS X or Linux computer with <strong>git</strong> and <strong>mkdocs</strong> installed and a web browser</li>
+<li>internet access and a GitHub account</li>
+<li>a text editor &ndash; any text editor will do but as the documentation will be created in <strong>markdown</strong> files it will be useful if the editor has support for markdown syntax highlighting, for example <strong>typora</strong>.</li>
+</ul>
+<h2 id="create-project">Create project</h2>
+<p>Create the local project directory in a suitable location:</p>
+<pre><code class="bash">galibier:~ david$ cd Projects
+galibier:Projects david$ mkdocs new mkdocs-ghpages-recipe
+INFO    -  Creating project directory: mkdocs-ghpages-recipe 
+INFO    -  Writing config file: mkdocs-ghpages-recipe/mkdocs.yml 
+INFO    -  Writing initial docs: mkdocs-ghpages-recipe/docs/index.md 
+</code></pre>
+
+<p>Replace the <code>index.md</code> file in the <code>docs</code> directory with the site content, written as markdown text. Edit the <code>mkdocs.yml</code> file to set the project name.</p>
+<p>Buld the site by running <code>mkdocs build</code> in the project directory and then test the site by running <code>mkdocs serve</code> and accessing http://127.0.0.1:8000/ in web browser. Make further changes to the files as needed and use Ctrl-C to stop the web server when finished.</p>
+<h2 id="create-local-git-repository-of-the-files">Create local git repository of the files</h2>
+<p>Create a local git repository of the project files:</p>
+<pre><code class="bash">galibier:~ david$ cd Projects
+galibier:Projects david$ git init mkdocs-ghpages-recipe/
+Initialized empty Git repository in /Users/david/Projects/mkdocs-ghpages-recipe/.git/
+</code></pre>
+
+<p>Add a README file and a LICENSE file for your project:</p>
+<pre><code class="bash">galibier:Projects david$ cd mkdocs-ghpages-recipe/
+galibier:mkdocs-ghpages-recipe david$ echo &quot;A step-by-step walkthrough to ...&quot; &gt;&gt; README.md
+galibier:mkdocs-ghpages-recipe david$ echo &quot;This project is in the PUBLIC DOMAIN&quot; &gt;&gt; LICENSE.md
+</code></pre>
+
+<p>Add a <code>.gitignore</code> file in the project directory so that generated files are not added to the repository:</p>
+<pre><code class="bash">galibier:mkdocs-ghpages-recipe david$ echo &quot;site/&quot; &gt;&gt; .gitignore
+</code></pre>
+
+<p>Create a local git repository and add the project files to it:</p>
+<pre><code class="bash">galibier:Projects david$ git init mkdocs-ghpages-recipe/
+Reinitialized existing Git repository in /Users/david/Projects/mkdocs-ghpages-recipe/.git/
+galibier:Projects david$ cd mkdocs-ghpages-recipe/
+galibier:mkdocs-ghpages-recipe david$ git add .
+galibier:mkdocs-ghpages-recipe david$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
+
+    new file:   .gitignore
+    new file:   LICENSE.md
+    new file:   README.md
+    new file:   docs/index.md
+    new file:   mkdocs.yml
+
+galibier:mkdocs-ghpages-recipe david$ git commit -m 'initial commit'
+[master (root-commit) 32b167d] initial commit
+ 5 files changed, 75 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 LICENSE.md
+ create mode 100644 README.md
+ create mode 100644 docs/index.md
+ create mode 100644 mkdocs.yml
+</code></pre>
+
+<h2 id="push-to-github">Push to GitHub</h2>
+<p>Create a new repository on GitHub but do <em>not</em> initialize the new repository with any files. Copy the remote respository URL.</p>
+<p>On the local computer:</p>
+<ul>
+<li>use the URL to add this as a remote repository</li>
+<li>push the local repository to GitHub</li>
+</ul>
+<pre><code class="bash">galibier:mkdocs-ghpages-recipe david$ git remote add origin https://github.com/outofphase/mkdocs-ghpages-recipe.git
+galibier:mkdocs-ghpages-recipe david$ git remote -v
+origin  https://github.com/outofphase/mkdocs-ghpages-recipe.git (fetch)
+origin  https://github.com/outofphase/mkdocs-ghpages-recipe.git (push)
+galibier:mkdocs-ghpages-recipe david$ git push -u origin master
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (8/8), 1.44 KiB | 1.44 MiB/s, done.
+Total 8 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/outofphase/mkdocs-ghpages-recipe.git
+ * [new branch]      master -&gt; master
+Branch 'master' set up to track remote branch 'master' from 'origin'. 
+</code></pre>
+
+<blockquote>
+<p>For more information see https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/</p>
+</blockquote>
+<h2 id="create-github-pages-site">Create GitHub Pages site</h2>
+<p>Use <code>mkdocs</code> to create a branch for the generated site files and to push it to GitHub. These will be available from the GitHub Pages website.</p>
+<pre><code class="bash">
+</code></pre>
+
+<h2 id="maintaining-the-site">Maintaining the site</h2></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.0.4
+Build Date UTC : 2018-12-24 11:51:19
+-->
